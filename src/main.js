@@ -16,7 +16,7 @@ export default class TiendanubeClient {
 
 		return this.#transform( params ).then( t_params => {
 
-			return this.#request( t_params );
+			return super.post( t_params );
 
 		});
 
@@ -27,7 +27,7 @@ export default class TiendanubeClient {
 
 		return this.#transform( params ).then( t_params => {
 
-			return this.#request( t_params );
+			return super.get( t_params );
 
 		});
 	}
@@ -37,7 +37,7 @@ export default class TiendanubeClient {
 
 		return this.#transform( params ).then( t_params => {
 
-			return this.#request( t_params );
+			return super.patch( t_params );
 
 		});
 	}
@@ -47,7 +47,7 @@ export default class TiendanubeClient {
 
 		return this.#transform( params ).then( t_params => {
 
-			return this.#request( t_params );
+			return super.delete( t_params );
 
 		});
 	}
@@ -57,7 +57,7 @@ export default class TiendanubeClient {
 
 		return this.#transform( params ).then( t_params => {
 
-			return this.#request( t_params );
+			return super.put( t_params );
 
 		});
 	}
