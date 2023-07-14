@@ -1,14 +1,23 @@
-import Client from '@umany/service-sdk-js';
+import ServiceSDKBase 	from '@umany/service-sdk-js';
+import axios 			from 'axios';
 
 
-export default class TiendanubeClient {
+export default class TiendanubeClient extends ServiceSDKBase {
 
+	#conf;
 
 	constructor ( config ) {
+	
+		super( 
+			Object.assign( 
+				config, 
+				{ 
+					baseUrl: "https://api.tiendanube.com/" + ( config.version ?? 'v1' ),
+				}
+			)
+		);
 
-		config.baseUrl = "https://api.tiendanube.com/" + ( config.version ?? 'v1' );
-
-		super ( config );
+		this.#conf = config;
 	}
 
 
@@ -114,6 +123,31 @@ export default class TiendanubeClient {
 			path: '/scripts/'+id,
 		});
 
+	}
+
+
+	getAccessToken ( authorization_code, options = {} ) {
+
+		return axios({
+			baseURL: 'https://www.tiendanube.com',
+			method: 'POST',
+			url: '/apps/authorize/token',
+			responseType: 'json',
+			responseEncoding: 'utf8',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			data: {
+				client_id: this.#conf.clientId ?? options.clientId,
+				client_secret: this.#conf.clientSecret ?? options.clientSecret,
+				grant_type: 'authorization_code',
+				code: authorization_code,
+			},
+			timeout: 0,
+		}).then( response => {
+
+			resolve( response.data );
+		});
 	}
 
 
