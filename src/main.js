@@ -1,5 +1,6 @@
-import ServiceSDKBase 	from '@umany/service-sdk-js';
-import axios 			from 'axios';
+import ServiceSDKBase 			from '@umany/service-sdk-js';
+import axios 					from 'axios';
+import { UnautorizedException } from '@umany/http-exceptions-js';
 
 
 export default class TiendanubeClient extends ServiceSDKBase {
@@ -128,26 +129,54 @@ export default class TiendanubeClient extends ServiceSDKBase {
 
 	getAccessToken ( authorization_code, options = {} ) {
 
-		return axios({
-			baseURL: 'https://www.tiendanube.com',
-			method: 'POST',
-			url: '/apps/authorize/token',
-			responseType: 'json',
-			responseEncoding: 'utf8',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			data: {
-				client_id: this.#conf.clientId ?? options.clientId,
-				client_secret: this.#conf.clientSecret ?? options.clientSecret,
-				grant_type: 'authorization_code',
-				code: authorization_code,
-			},
-			timeout: 0,
-		}).then( response => {
+		return new Promise ( ( resolve, reject ) => {
 
-			resolve( response.data );
+			// verify if authorization code is present before calling the API
+			if ( req.query.code ) {
+
+				axios({
+					baseURL: 'https://www.tiendanube.com',
+					method: 'POST',
+					url: '/apps/authorize/token',
+					responseType: 'json',
+					responseEncoding: 'utf8',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					data: {
+						client_id: this.#conf.clientId ?? options.clientId,
+						client_secret: this.#conf.clientSecret ?? options.clientSecret,
+						grant_type: 'authorization_code',
+						code: authorization_code,
+					},
+					timeout: 0,
+				}).then( response => {
+
+					resolve( response.data );
+
+				}).catch( err => {
+
+					if ( 
+						err.response?.status == 401
+						|| err.response?.status == 403
+					) 
+					{
+						reject( new UnautorizedException );
+					}
+					else {
+
+						reject( err );
+					}
+				});
+
+			}
+			else {
+
+				reject( new UnautorizedException );
+			}
 		});
+
+
 	}
 
 
@@ -155,6 +184,7 @@ export default class TiendanubeClient extends ServiceSDKBase {
 
 		return Promise( resolve => {
 
+			// add umany as user-agent
 			params.headers['User-Agent'] = 'umany (dev@umany.global)';
 
 			resolve( params );
