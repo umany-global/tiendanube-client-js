@@ -6,7 +6,7 @@ export default class TiendanubeClient extends ServiceSDKBase {
 
 	#conf;
 
-	constructor ( config ) {
+	constructor ( config = {} ) {
 	
 		super( 
 			Object.assign( 
