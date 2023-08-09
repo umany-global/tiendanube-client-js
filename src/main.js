@@ -149,7 +149,7 @@ export default class TiendanubeClient extends ServiceSDKBase {
 						grant_type: 'authorization_code',
 						code: authorization_code,
 					},
-					timeout: 0,
+					timeout: options.timeout ?? 0,
 				}).then( response => {
 
 					resolve( response.data );
