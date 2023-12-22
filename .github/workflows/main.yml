@@ -18,4 +18,4 @@ jobs:
       - run: yarn
       - run: yarn npm publish // for Yarn version 1, use `yarn publish` instead
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
