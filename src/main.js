@@ -1,6 +1,6 @@
-import ServiceSDKBase 			from '@umany/service-sdk-js';
+import ServiceSDKBase 			from '@umany-global/rest-client-js';
 import axios 					from 'axios';
-import { UnautorizedException } from '@umany/http-exceptions-js';
+import { UnautorizedException } from '@umany-global/http-exceptions-js';
 
 
 export default class TiendanubeClient extends ServiceSDKBase {
@@ -185,7 +185,7 @@ export default class TiendanubeClient extends ServiceSDKBase {
 		return Promise( resolve => {
 
 			// add umany as user-agent
-			params.headers['User-Agent'] = 'umany (dev@umany.global)';
+			params.headers['User-Agent'] = this.#conf.userAgent ?? 'Umany (dev@umany.global)';
 
 			resolve( params );
 		});

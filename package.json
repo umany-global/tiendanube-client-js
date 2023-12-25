@@ -1,5 +1,5 @@
 {
-  "name": "@umany/tiendanube-client-js",
+  "name": "@umany-global/tiendanube-client-js",
   "version": "1.0.8",
   "type": "module",
   "main": "./src/main.js",
@@ -7,7 +7,8 @@
   "author": "dan",
   "license": "MIT",
   "dependencies": {
-    "@umany/http-exceptions-js": "^1.3.3",
-    "@umany/service-sdk-js": "^1.3.1"
+    "@umany-global/http-exceptions-js": "^1.3.6",
+    "@umany-global/rest-client-js": "^1.3.1",
+    "axios": "^1.6.2"
   }
 }
