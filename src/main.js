@@ -1,15 +1,16 @@
-import ServiceSDKBase 			from '@umany-global/rest-client-js';
-import axios 					from 'axios';
-import { UnautorizedException } from '@umany-global/http-exceptions-js';
+import RESTClient from '@umany-global/rest-client-js';
+
+const defaultUserAgent = 'Umany (dev@umany.global)';
 
 
-export default class TiendanubeClient extends ServiceSDKBase {
+export default class TiendanubeClient {
 
-	#conf;
+	#client;
+	#authClient;
 
 	constructor ( config = {} ) {
-	
-		super( 
+
+		this.#client = new RESTClient(
 			Object.assign( 
 				config, 
 				{ 
@@ -18,177 +19,163 @@ export default class TiendanubeClient extends ServiceSDKBase {
 			)
 		);
 
-		this.#conf = config;
+		this.#authClient = new RESTClient(
+			Object.assign( 
+				config, 
+				{ 
+					baseUrl: 'https://www.tiendanube.com/apps/authorize/token',
+				}
+			)
+		);
+
+	}
+
+	// params.id - order identifier
+	// params.store_id - shop identifier
+	// options.auth - access token
+	getOrderById ( params, options = {} ) {
+
+		return this.#client.get({
+			path: '/'+params.store_id+'/orders/'+params.id,
+			auth: options.auth,
+			headers: {
+				'User-Agent': config.userAgent ?? defaultUserAgent,
+			},
+		});
+	}
+
+	// params.id - shop identifier
+	// options.auth - access token
+	getStore ( id, options = {} ) {
+
+		return this.#client.get({
+			path: '/'+id+'/store',
+			auth: options.auth,
+			headers: {
+				'User-Agent': config.userAgent ?? defaultUserAgent,
+			},
+		});
+	}
+
+	// params.store_id - shop identifier
+	// options.auth - access token
+	createWebhook ( params, options = {} ) {
+
+		return this.#client.post({
+			path: '/'+params.store_id+'/webhooks',
+			data: {
+				event: params.event,
+				url: params.url,
+			},
+			auth: options.auth,
+			headers: {
+				'User-Agent': config.userAgent ?? defaultUserAgent,
+			},
+		});
+
+	}
+
+	// store_id - shop identifier
+	// options.auth - access token
+	getWebhooks ( store_id, options = {} ) {
+
+		return this.#client.get({
+			path: '/'+store_id+'/webhooks',
+			auth: options.auth,
+			headers: {
+				'User-Agent': config.userAgent ?? defaultUserAgent,
+			},
+		});
 	}
 
 
-	post ( params ) {
+	// params.id - webhook identifier
+	// params.store_id - shop identifier
+	// options.auth - access token
+	deleteWebhook ( params, options = {} ) {
 
-		return this.#transform( params ).then( t_params => {
-
-			return super.post( t_params );
-
+		return this.#client.post({
+			path: '/'+params.store_id+'/webhooks/'+params.id,
+			auth: options.auth,
+			headers: {
+				'User-Agent': config.userAgent ?? defaultUserAgent,
+			},
 		});
 
 	}
 
 
-	get ( params ) { 
+	// params.store_id - shop identifier
+	// params.src - source url for the script
+	// params.event - tiendanube event identifier
+	// params.where - tiendanube flow identifier
+	// options.auth - access token
+	addScript ( params, options = {} ) {
 
-		return this.#transform( params ).then( t_params => {
-
-			return super.get( t_params );
-
-		});
-	}
-
-
-	patch ( params ) {
-
-		return this.#transform( params ).then( t_params => {
-
-			return super.patch( t_params );
-
-		});
-	}
-
-
-	delete ( params ) {
-
-		return this.#transform( params ).then( t_params => {
-
-			return super.delete( t_params );
-
-		});
-	}
-
-
-	put ( params ) {
-
-		return this.#transform( params ).then( t_params => {
-
-			return super.put( t_params );
-
-		});
-	}
-
-
-	getOrderById ( id ) {
-
-		return this.get({
-			path: '/orders/'+id,
-		});
-	}
-
-
-	getStore ( ) {
-
-		return this.get({
-			path: '/store',
-		});
-	}
-
-
-	createWebhook ( data ) {
-
-		return this.post({
-			path: '/webhooks',
-			data,
+		return this.#client.post({
+			path: '/'+params.store_id+'/scripts',
+			data: {
+				src: params.src,
+				event: params.event,
+				where: params.where,
+			},
+			auth: options.auth,
+			headers: {
+				'User-Agent': config.userAgent ?? defaultUserAgent,
+			},
 		});
 
 	}
 
 
-	deleteWebhook ( id ) {
+	// params.id - script identifier
+	// params.store_id - shop identifier
+	// options.auth - access token
+	removeScript ( params, options = {} ) {
 
-		return this.post({
-			path: '/webhooks/'+id,
+		return this.#client.post({
+			path: '/'+params.store_id+'/scripts/'+params.id,
+			auth: options.auth,
+			headers: {
+				'User-Agent': config.userAgent ?? defaultUserAgent,
+			},
 		});
 
 	}
 
 
-	addScript ( data ) {
-
-		this.post({
-			path: '/scripts',
-			data,
-		});
-
-	}
-
-
-	removeScript ( id ) {
-
-		return this.post({
-			path: '/scripts/'+id,
-		});
-
-	}
-
-
-	getAccessToken ( authorization_code, options = {} ) {
+	getAccessToken ( params, options = {} ) {
 
 		return new Promise ( ( resolve, reject ) => {
 
 			// verify if authorization code is present before calling the API
-			if ( req.query.code ) {
+			if ( params.code ) {
 
-				axios({
-					baseURL: 'https://www.tiendanube.com',
-					method: 'POST',
-					url: '/apps/authorize/token',
-					responseType: 'json',
-					responseEncoding: 'utf8',
-					headers: {
-						'Content-Type': 'application/json',
-					},
+				this.#authClient.post({
+					path: '/apps/authorize/token',
 					data: {
-						client_id: this.#conf.clientId ?? options.clientId,
-						client_secret: this.#conf.clientSecret ?? options.clientSecret,
+						client_id: params.clientId,
+						client_secret: params.clientSecret,
 						grant_type: 'authorization_code',
-						code: authorization_code,
+						code: params.code,
 					},
 					timeout: options.timeout ?? 0,
-				}).then( response => {
+				}).then( data => {
 
-					resolve( response.data );
+					resolve( data );
 
 				}).catch( err => {
 
-					if ( 
-						err.response?.status == 401
-						|| err.response?.status == 403
-					) 
-					{
-						reject( new UnautorizedException );
-					}
-					else {
-
-						reject( err );
-					}
+					reject( err );
 				});
 
 			}
 			else {
 
-				reject( new UnautorizedException );
+				reject( new Error('Param required: code') );
 			}
 		});
 
-
-	}
-
-
-	#transform ( params ) {
-
-		return Promise( resolve => {
-
-			// add umany as user-agent
-			params.headers['User-Agent'] = this.#conf.userAgent ?? 'Umany (dev@umany.global)';
-
-			resolve( params );
-		});
 	}
 
 }
