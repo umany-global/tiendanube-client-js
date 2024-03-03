@@ -8,10 +8,13 @@ export default class TiendanubeClient {
 	#client;
 	#authClient;
 	#clientId;
+	#clientSecret;
+
 
 	constructor ( config = {} ) {
 
-		this.#clientId = config.clientId;
+		this.#clientId 		= config.clientId;
+		this.#clientSecret 	= config.clientSecret;
 
 		this.#client = new RESTClient(
 			Object.assign( 
@@ -26,7 +29,7 @@ export default class TiendanubeClient {
 			Object.assign( 
 				config, 
 				{ 
-					baseUrl: 'https://www.tiendanube.com/apps/authorize/token',
+					baseUrl: 'https://www.tiendanube.com/apps',
 				}
 			)
 		);
@@ -147,7 +150,7 @@ export default class TiendanubeClient {
 	}
 
 
-	getAccessToken ( params, options = {} ) {
+	getAccessToken ( params = {} ) {
 
 		return new Promise ( ( resolve, reject ) => {
 
@@ -155,10 +158,10 @@ export default class TiendanubeClient {
 			if ( params.code ) {
 
 				this.#authClient.post({
-					path: '/apps/'+this.#clientId+'/authorize/token',
+					path: '/'+( params.clientId ?? this.#clientId )+'/authorize/token',
 					data: {
-						client_id: params.clientId,
-						client_secret: params.clientSecret,
+						client_id: params.clientId ?? this.#clientId,
+						client_secret: params.clientSecret ?? this.#clientSecret,
 						grant_type: 'authorization_code',
 						code: params.code,
 					},
