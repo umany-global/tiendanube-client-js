@@ -152,7 +152,7 @@ export default class TiendanubeClient {
 			if ( params.code ) {
 
 				this.#authClient.post({
-					path: '/apps/authorize/token',
+					path: '/apps/'+clientId+'/authorize/token',
 					data: {
 						client_id: params.clientId,
 						client_secret: params.clientSecret,
