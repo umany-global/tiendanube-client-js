@@ -7,8 +7,11 @@ export default class TiendanubeClient {
 
 	#client;
 	#authClient;
+	#clientId;
 
 	constructor ( config = {} ) {
+
+		this.#clientId = config.clientId;
 
 		this.#client = new RESTClient(
 			Object.assign( 
@@ -152,7 +155,7 @@ export default class TiendanubeClient {
 			if ( params.code ) {
 
 				this.#authClient.post({
-					path: '/apps/'+clientId+'/authorize/token',
+					path: '/apps/'+this.#clientId+'/authorize/token',
 					data: {
 						client_id: params.clientId,
 						client_secret: params.clientSecret,
