@@ -14,10 +14,10 @@
   dependencies:
     "@umany-global/base-exceptions-js" "^1.2.4"
 
-"@umany-global/rest-client-js@^1.3.2":
-  version "1.3.2"
-  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.3.2/9827bfa5b96893005c5656acf2de418f10e58aa9#9827bfa5b96893005c5656acf2de418f10e58aa9"
-  integrity sha512-kaG7eSTdp53EaNtI0EQnLUvXr8OkbhrYEjayE9hC1758gyQcoy5KiBpxZddJ5XOk3BEbatqAfKvERDLuLr4gEQ==
+"@umany-global/rest-client-js@^1.3.3":
+  version "1.3.3"
+  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.3.3/bb5c781b0a6e5307d893ca2612935d834752c0c3#bb5c781b0a6e5307d893ca2612935d834752c0c3"
+  integrity sha512-wgac0Hkh/gSrHi9QrbWsyLd9O+iMV/z/aYNgTr02MaiRZt3M05IR8yHKFjw5/JH4SKu2f+sqJqpJbCGupP3hoQ==
   dependencies:
     "@umany-global/base-exceptions-js" "^1.2.4"
     axios "^1.6.2"
