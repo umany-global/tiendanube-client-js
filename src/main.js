@@ -165,7 +165,7 @@ export default class TiendanubeClient {
 						grant_type: 'authorization_code',
 						code: params.code,
 					},
-					timeout: options.timeout ?? 0,
+					timeout: options.timeout ?? 60,
 				}).then( data => {
 
 					resolve( data );
