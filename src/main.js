@@ -29,7 +29,7 @@ export default class TiendanubeClient {
 			Object.assign( 
 				config, 
 				{ 
-					baseUrl: 'https://www.tiendanube.com/apps',
+					baseUrl: 'https://www.tiendanube.com',
 				}
 			)
 		);
@@ -158,7 +158,7 @@ export default class TiendanubeClient {
 			if ( params.code ) {
 
 				this.#authClient.post({
-					path: '/'+( params.clientId ?? this.#clientId )+'/authorize/token',
+					path: '/apps/authorize/token',
 					data: {
 						client_id: params.clientId ?? this.#clientId,
 						client_secret: params.clientSecret ?? this.#clientSecret,
