@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@umany-global/http-exceptions-js": "^1.3.6",
-    "@umany-global/rest-client-js": "^1.3.3",
+    "@umany-global/rest-client-js": "^1.3.5",
     "axios": "^1.6.2"
   }
 }

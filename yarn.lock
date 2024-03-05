@@ -7,6 +7,11 @@
   resolved "https://npm.pkg.github.com/download/@umany-global/base-exceptions-js/1.2.4/5fbc52294a61df1f1321516412dd9cb05065f22d#5fbc52294a61df1f1321516412dd9cb05065f22d"
   integrity sha512-IIZzIHJAFzWNx+IwMql81N3qaAAqf3q1G92lcn1zdCyGPRCiZfnkRZstAhUjsKoHQomAfUvE5aWrj394ANT7cA==
 
+"@umany-global/base-exceptions-js@^1.3.3":
+  version "1.3.3"
+  resolved "https://npm.pkg.github.com/download/@umany-global/base-exceptions-js/1.3.3/de507c2fd6e89060f604219a9ba76f8f2643c038#de507c2fd6e89060f604219a9ba76f8f2643c038"
+  integrity sha512-8kvAV3IW2QWqxU1+Myj14PDCVuuPdOGljlaNHDj9+i15JC1xnFe53xJaK4h+Cct/V4sD/0fZFB7Tc9PpS7ZUUQ==
+
 "@umany-global/http-exceptions-js@^1.3.6":
   version "1.3.6"
   resolved "https://npm.pkg.github.com/download/@umany-global/http-exceptions-js/1.3.6/f3a8bd49c2927b5bbf6021dec2139cc0e5b10818#f3a8bd49c2927b5bbf6021dec2139cc0e5b10818"
@@ -14,12 +19,12 @@
   dependencies:
     "@umany-global/base-exceptions-js" "^1.2.4"
 
-"@umany-global/rest-client-js@^1.3.3":
-  version "1.3.3"
-  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.3.3/bb5c781b0a6e5307d893ca2612935d834752c0c3#bb5c781b0a6e5307d893ca2612935d834752c0c3"
-  integrity sha512-wgac0Hkh/gSrHi9QrbWsyLd9O+iMV/z/aYNgTr02MaiRZt3M05IR8yHKFjw5/JH4SKu2f+sqJqpJbCGupP3hoQ==
+"@umany-global/rest-client-js@^1.3.5":
+  version "1.3.5"
+  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.3.5/c77312e33644f402d41e457f22b72fd92b0711ef#c77312e33644f402d41e457f22b72fd92b0711ef"
+  integrity sha512-Nb7urwKBT7dij2lG4IQkuISpVx7yH3uIXyn4mM+YwyFW/3ULcCYunOORqaNgdLnk61MZXYQ5fMAd776yUXAyXA==
   dependencies:
-    "@umany-global/base-exceptions-js" "^1.2.4"
+    "@umany-global/base-exceptions-js" "^1.3.3"
     axios "^1.6.2"
 
 asynckit@^0.4.0:
