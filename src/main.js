@@ -21,6 +21,9 @@ export default class TiendanubeClient {
 				config, 
 				{ 
 					baseUrl: "https://api.tiendanube.com/" + ( config.version ?? 'v1' ),
+					baseHeaders: {
+						'User-Agent': 'Umany (contact@umany.global)',
+					},
 				}
 			)
 		);
@@ -44,9 +47,6 @@ export default class TiendanubeClient {
 		return this.#client.get({
 			path: '/'+params.store_id+'/orders/'+params.id,
 			auth: options.auth,
-			headers: {
-				'User-Agent': super.config.userAgent ?? defaultUserAgent,
-			},
 		});
 	}
 
@@ -57,9 +57,6 @@ export default class TiendanubeClient {
 		return this.#client.get({
 			path: '/'+id+'/store',
 			auth: options.auth,
-			headers: {
-				'User-Agent': super.config.userAgent ?? defaultUserAgent,
-			},
 		});
 	}
 
@@ -74,9 +71,6 @@ export default class TiendanubeClient {
 				url: params.url,
 			},
 			auth: options.auth,
-			headers: {
-				'User-Agent': super.config.userAgent ?? defaultUserAgent,
-			},
 		});
 
 	}
@@ -88,9 +82,6 @@ export default class TiendanubeClient {
 		return this.#client.get({
 			path: '/'+store_id+'/webhooks',
 			auth: options.auth,
-			headers: {
-				'User-Agent': super.config.userAgent ?? defaultUserAgent,
-			},
 		});
 	}
 
@@ -103,9 +94,6 @@ export default class TiendanubeClient {
 		return this.#client.post({
 			path: '/'+params.store_id+'/webhooks/'+params.id,
 			auth: options.auth,
-			headers: {
-				'User-Agent': super.config.userAgent ?? defaultUserAgent,
-			},
 		});
 
 	}
