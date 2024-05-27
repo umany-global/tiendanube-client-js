@@ -45,7 +45,7 @@ export default class TiendanubeClient {
 			path: '/'+params.store_id+'/orders/'+params.id,
 			auth: options.auth,
 			headers: {
-				'User-Agent': config.userAgent ?? defaultUserAgent,
+				'User-Agent': this.config.userAgent ?? defaultUserAgent,
 			},
 		});
 	}
@@ -58,7 +58,7 @@ export default class TiendanubeClient {
 			path: '/'+id+'/store',
 			auth: options.auth,
 			headers: {
-				'User-Agent': config.userAgent ?? defaultUserAgent,
+				'User-Agent': this.config.userAgent ?? defaultUserAgent,
 			},
 		});
 	}
@@ -75,7 +75,7 @@ export default class TiendanubeClient {
 			},
 			auth: options.auth,
 			headers: {
-				'User-Agent': config.userAgent ?? defaultUserAgent,
+				'User-Agent': this.config.userAgent ?? defaultUserAgent,
 			},
 		});
 
@@ -89,7 +89,7 @@ export default class TiendanubeClient {
 			path: '/'+store_id+'/webhooks',
 			auth: options.auth,
 			headers: {
-				'User-Agent': config.userAgent ?? defaultUserAgent,
+				'User-Agent': this.config.userAgent ?? defaultUserAgent,
 			},
 		});
 	}
@@ -104,7 +104,7 @@ export default class TiendanubeClient {
 			path: '/'+params.store_id+'/webhooks/'+params.id,
 			auth: options.auth,
 			headers: {
-				'User-Agent': config.userAgent ?? defaultUserAgent,
+				'User-Agent': this.config.userAgent ?? defaultUserAgent,
 			},
 		});
 
@@ -127,7 +127,7 @@ export default class TiendanubeClient {
 			},
 			auth: options.auth,
 			headers: {
-				'User-Agent': config.userAgent ?? defaultUserAgent,
+				'User-Agent': this.config.userAgent ?? defaultUserAgent,
 			},
 		});
 
@@ -143,7 +143,7 @@ export default class TiendanubeClient {
 			path: '/'+params.store_id+'/scripts/'+params.id,
 			auth: options.auth,
 			headers: {
-				'User-Agent': config.userAgent ?? defaultUserAgent,
+				'User-Agent': this.config.userAgent ?? defaultUserAgent,
 			},
 		});
 
