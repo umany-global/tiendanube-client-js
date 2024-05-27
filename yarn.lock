@@ -2,42 +2,30 @@
 # yarn lockfile v1
 
 
-"@umany-global/base-exceptions-js@^1.2.4":
-  version "1.2.4"
-  resolved "https://npm.pkg.github.com/download/@umany-global/base-exceptions-js/1.2.4/5fbc52294a61df1f1321516412dd9cb05065f22d#5fbc52294a61df1f1321516412dd9cb05065f22d"
-  integrity sha512-IIZzIHJAFzWNx+IwMql81N3qaAAqf3q1G92lcn1zdCyGPRCiZfnkRZstAhUjsKoHQomAfUvE5aWrj394ANT7cA==
-
 "@umany-global/base-exceptions-js@^1.3.3":
   version "1.3.3"
   resolved "https://npm.pkg.github.com/download/@umany-global/base-exceptions-js/1.3.3/de507c2fd6e89060f604219a9ba76f8f2643c038#de507c2fd6e89060f604219a9ba76f8f2643c038"
   integrity sha512-8kvAV3IW2QWqxU1+Myj14PDCVuuPdOGljlaNHDj9+i15JC1xnFe53xJaK4h+Cct/V4sD/0fZFB7Tc9PpS7ZUUQ==
 
-"@umany-global/http-exceptions-js@^1.3.6":
+"@umany-global/rest-client-js@^1.3.6":
   version "1.3.6"
-  resolved "https://npm.pkg.github.com/download/@umany-global/http-exceptions-js/1.3.6/f3a8bd49c2927b5bbf6021dec2139cc0e5b10818#f3a8bd49c2927b5bbf6021dec2139cc0e5b10818"
-  integrity sha512-8+t0ALjPrHoBSNFmn06L1+0IvO0jkP6bRHhnX8Kx11idUuPf6x2fwuo9PfVKTufN/DfP2l6i5QB+twByfCKH7g==
-  dependencies:
-    "@umany-global/base-exceptions-js" "^1.2.4"
-
-"@umany-global/rest-client-js@^1.3.5":
-  version "1.3.5"
-  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.3.5/c77312e33644f402d41e457f22b72fd92b0711ef#c77312e33644f402d41e457f22b72fd92b0711ef"
-  integrity sha512-Nb7urwKBT7dij2lG4IQkuISpVx7yH3uIXyn4mM+YwyFW/3ULcCYunOORqaNgdLnk61MZXYQ5fMAd776yUXAyXA==
+  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.3.6/bdd0febdf57c6bd3df6e8d2b4efbed5f949b1daa#bdd0febdf57c6bd3df6e8d2b4efbed5f949b1daa"
+  integrity sha512-3LiUjrSveAnDFCUWNRhRrZHnC0zm2fSvABqmgeXhI33D07NtLIXL64vqI1EkQUzkBrPtP9Uv71a3hFksYAo/fw==
   dependencies:
     "@umany-global/base-exceptions-js" "^1.3.3"
-    axios "^1.6.2"
+    axios "^1.7.2"
 
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.2.tgz#de67d42c755b571d3e698df1b6504cde9b0ee9f2"
-  integrity sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==
+axios@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.2.tgz#b625db8a7051fbea61c35a3cbb3a1daa7b9c7621"
+  integrity sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==
   dependencies:
-    follow-redirects "^1.15.0"
+    follow-redirects "^1.15.6"
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
@@ -53,10 +41,10 @@ delayed-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
 
-follow-redirects@^1.15.0:
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
-  integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
+follow-redirects@^1.15.6:
+  version "1.15.6"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
+  integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
 
 form-data@^4.0.0:
   version "4.0.0"
