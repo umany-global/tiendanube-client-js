@@ -1,8 +1,5 @@
 import RESTClient from '@umany-global/rest-client-js';
 
-const defaultUserAgent = 'Umany (dev@umany.global)';
-
-
 export default class TiendanubeClient {
 
 	#client;
@@ -46,7 +43,9 @@ export default class TiendanubeClient {
 
 		return this.#client.get({
 			path: '/'+params.store_id+'/orders/'+params.id,
-			auth: options.auth,
+			headers: {
+				'Authentication': 'bearer ' + options.auth,
+			},
 		});
 	}
 
@@ -56,7 +55,9 @@ export default class TiendanubeClient {
 
 		return this.#client.get({
 			path: '/'+id+'/store',
-			auth: options.auth,
+			headers: {
+				'Authentication': 'bearer ' + options.auth,
+			},
 		});
 	}
 
@@ -70,7 +71,9 @@ export default class TiendanubeClient {
 				event: params.event,
 				url: params.url,
 			},
-			auth: options.auth,
+			headers: {
+				'Authentication': 'bearer ' + options.auth,
+			},
 		});
 
 	}
@@ -81,7 +84,9 @@ export default class TiendanubeClient {
 
 		return this.#client.get({
 			path: '/'+store_id+'/webhooks',
-			auth: options.auth,
+			headers: {
+				'Authentication': 'bearer ' + options.auth,
+			},
 		});
 	}
 
@@ -93,7 +98,9 @@ export default class TiendanubeClient {
 
 		return this.#client.post({
 			path: '/'+params.store_id+'/webhooks/'+params.id,
-			auth: options.auth,
+			headers: {
+				'Authentication': 'bearer ' + options.auth,
+			},
 		});
 
 	}
@@ -113,9 +120,8 @@ export default class TiendanubeClient {
 				event: params.event,
 				where: params.where,
 			},
-			auth: options.auth,
 			headers: {
-				'User-Agent': super.config.userAgent ?? defaultUserAgent,
+				'Authentication': 'bearer ' + options.auth,
 			},
 		});
 
@@ -131,7 +137,7 @@ export default class TiendanubeClient {
 			path: '/'+params.store_id+'/scripts/'+params.id,
 			auth: options.auth,
 			headers: {
-				'User-Agent': super.config.userAgent ?? defaultUserAgent,
+				'Authentication': 'bearer ' + options.auth,
 			},
 		});
 
