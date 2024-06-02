@@ -13,26 +13,22 @@ export default class TiendanubeClient {
 		this.#clientId 		= config.clientId;
 		this.#clientSecret 	= config.clientSecret;
 
-		this.#client = new RESTClient(
-			Object.assign( 
-				config, 
-				{ 
-					baseUrl: "https://api.tiendanube.com/" + ( config.version ?? 'v1' ),
-					baseHeaders: {
-						'User-Agent': 'Umany (contact@umany.global)',
-					},
-				}
-			)
-		);
+		this.#client = new RESTClient({
+			...( config ), 
+			...({ 
+				baseUrl: "https://api.tiendanube.com/" + ( config.version ?? 'v1' ),
+				baseHeaders: {
+					'User-Agent': 'Umany (contact@umany.global)',
+				},
+			}),
+		});
 
-		this.#authClient = new RESTClient(
-			Object.assign( 
-				config, 
-				{ 
-					baseUrl: 'https://www.tiendanube.com',
-				}
-			)
-		);
+		this.#authClient = new RESTClient({
+			...( config ), 
+			...({ 
+				baseUrl: 'https://www.tiendanube.com',
+			}),
+		});
 
 	}
 
