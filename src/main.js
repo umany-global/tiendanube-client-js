@@ -6,12 +6,13 @@ export default class TiendanubeClient {
 	#authClient;
 	#clientId;
 	#clientSecret;
-
+	#delay;
 
 	constructor ( config = {} ) {
 
 		this.#clientId 		= config.clientId;
 		this.#clientSecret 	= config.clientSecret;
+		this.#delay			= config.delay ?? 1000;
 
 		this.#client = new RESTClient({
 			...( config ), 
@@ -37,53 +38,72 @@ export default class TiendanubeClient {
 	// options.auth - access token
 	getOrderById ( params, options = {} ) {
 
-		return this.#client.get({
-			path: '/'+params.store_id+'/orders/'+params.id,
-			headers: {
-				'Authentication': 'bearer ' + options.auth,
-			},
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.get({
+				path: '/'+params.store_id+'/orders/'+params.id,
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
 		});
+
 	}
 
 	// params.id - shop identifier
 	// options.auth - access token
 	getStore ( id, options = {} ) {
 
-		return this.#client.get({
-			path: '/'+id+'/store',
-			headers: {
-				'Authentication': 'bearer ' + options.auth,
-			},
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.get({
+				path: '/'+id+'/store',
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
 		});
+
 	}
 
 	// params.store_id - shop identifier
 	// options.auth - access token
 	createWebhook ( params, options = {} ) {
 
-		return this.#client.post({
-			path: '/'+params.store_id+'/webhooks',
-			data: {
-				event: params.event,
-				url: params.url,
-			},
-			headers: {
-				'Authentication': 'bearer ' + options.auth,
-			},
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.post({
+				path: '/'+params.store_id+'/webhooks',
+				data: {
+					event: params.event,
+					url: params.url,
+				},
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
 		});
 
 	}
 
 	// store_id - shop identifier
 	// options.auth - access token
-	getWebhooks ( store_id, options = {} ) {
+	getWebhooks ( params, options = {} ) {
 
-		return this.#client.get({
-			path: '/'+store_id+'/webhooks',
-			headers: {
-				'Authentication': 'bearer ' + options.auth,
-			},
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.get({
+				path: '/'+params.store_id+'/webhooks',
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
 		});
+
 	}
 
 
@@ -92,11 +112,15 @@ export default class TiendanubeClient {
 	// options.auth - access token
 	deleteWebhook ( params, options = {} ) {
 
-		return this.#client.post({
-			path: '/'+params.store_id+'/webhooks/'+params.id,
-			headers: {
-				'Authentication': 'bearer ' + options.auth,
-			},
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.post({
+				path: '/'+params.store_id+'/webhooks/'+params.id,
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
 		});
 
 	}
@@ -109,16 +133,20 @@ export default class TiendanubeClient {
 	// options.auth - access token
 	addScript ( params, options = {} ) {
 
-		return this.#client.post({
-			path: '/'+params.store_id+'/scripts',
-			data: {
-				src: params.src,
-				event: params.event,
-				where: params.where,
-			},
-			headers: {
-				'Authentication': 'bearer ' + options.auth,
-			},
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.post({
+				path: '/'+params.store_id+'/scripts',
+				data: {
+					src: params.src,
+					event: params.event,
+					where: params.where,
+				},
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
 		});
 
 	}
@@ -129,12 +157,16 @@ export default class TiendanubeClient {
 	// options.auth - access token
 	removeScript ( params, options = {} ) {
 
-		return this.#client.post({
-			path: '/'+params.store_id+'/scripts/'+params.id,
-			auth: options.auth,
-			headers: {
-				'Authentication': 'bearer ' + options.auth,
-			},
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.post({
+				path: '/'+params.store_id+'/scripts/'+params.id,
+				auth: options.auth,
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
 		});
 
 	}
@@ -172,6 +204,40 @@ export default class TiendanubeClient {
 			}
 		});
 
+	}
+
+
+	#avoidRateLimit ( ) {
+
+		return new Promise ( resolve => {
+
+			try {
+
+				// check if requestDelay param was set
+				if ( this.#delay ) {
+
+					// delay api call
+					setTimeout( 
+						() => {
+
+							resolve()
+						},
+						this.#delay
+					);
+				}
+				else {
+
+					// do nothing
+					resolve();
+				}
+
+			}
+			catch ( err ) {
+
+				reject( err );
+			}
+
+		});
 	}
 
 }
