@@ -12,7 +12,7 @@ export default class TiendanubeClient {
 
 		this.#clientId 		= config.clientId;
 		this.#clientSecret 	= config.clientSecret;
-		this.#delay			= config.delay ?? 1000;
+		this.#delay			= config.delay ?? 500;
 
 		this.#client = new RESTClient({
 			...( config ), 
@@ -36,7 +36,7 @@ export default class TiendanubeClient {
 	// params.id - order identifier
 	// params.store_id - shop identifier
 	// options.auth - access token
-	getOrderById ( params, options = {} ) {
+	getOrder ( params, options = {} ) {
 
 		return this.#avoidRateLimit().then( () => {
 
@@ -45,6 +45,10 @@ export default class TiendanubeClient {
 				headers: {
 					'Authentication': 'bearer ' + options.auth,
 				},
+			}).then( response => {
+
+				return response.data;
+
 			});
 
 		});
@@ -64,6 +68,10 @@ export default class TiendanubeClient {
 				},
 			});
 
+		}).then( response => {
+
+			return response.data;
+			
 		});
 
 	}
@@ -85,6 +93,10 @@ export default class TiendanubeClient {
 				},
 			});
 
+		}).then( response => {
+
+			return response.data;
+			
 		});
 
 	}
@@ -102,6 +114,37 @@ export default class TiendanubeClient {
 				},
 			});
 
+		}).then( response => {
+
+			return response.data;
+			
+		});
+
+	}
+
+
+	// id - webhook identifier
+	// store_id - shop identifier
+	// options.auth - access token
+	updateWebhook ( params, attributes, options = {} ) {
+
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.get({
+				path: '/'+params.store_id+'/webhooks/'+params.id,
+				data: {
+					event: attributes.event,
+					url: attributes.url,
+				},
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
+		}).then( response => {
+
+			return response.data;
+			
 		});
 
 	}
@@ -121,10 +164,35 @@ export default class TiendanubeClient {
 				},
 			});
 
+		}).then( response => {
+
+			return response.data;
+			
 		});
 
 	}
 
+
+	// store_id - shop identifier
+	// options.auth - access token
+	getScripts ( params, options = {} ) {
+
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.get({
+				path: '/'+params.store_id+'/scripts',
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
+		}).then( response => {
+
+			return response.data;
+			
+		});
+
+	}
 
 	// params.store_id - shop identifier
 	// params.src - source url for the script
@@ -147,6 +215,38 @@ export default class TiendanubeClient {
 				},
 			});
 
+		}).then( response => {
+
+			return response.data;
+			
+		});
+
+	}
+
+
+	// id - script id
+	// store_id - shop identifier
+	// options.auth - access token
+	updateScript ( params, attributes, options = {} ) {
+
+		return this.#avoidRateLimit().then( () => {
+
+			return this.#client.get({
+				path: '/'+params.store_id+'/scripts/'+params.id,
+				data: {
+					src: attributes.src,
+					event: attributes.event,
+					where: attributes.where,
+				},
+				headers: {
+					'Authentication': 'bearer ' + options.auth,
+				},
+			});
+
+		}).then( response => {
+
+			return response.data;
+			
 		});
 
 	}
@@ -167,6 +267,10 @@ export default class TiendanubeClient {
 				},
 			});
 
+		}).then( response => {
+
+			return response.data;
+			
 		});
 
 	}
@@ -188,9 +292,9 @@ export default class TiendanubeClient {
 						code: params.code,
 					},
 					timeout: params.timeout ?? 60000,
-				}).then( data => {
+				}).then( response => {
 
-					resolve( data );
+					resolve( response.data );
 
 				}).catch( err => {
 
@@ -222,7 +326,7 @@ export default class TiendanubeClient {
 
 							resolve()
 						},
-						this.#delay
+						this.#delay + 1
 					);
 				}
 				else {
