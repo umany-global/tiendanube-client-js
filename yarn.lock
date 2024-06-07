@@ -7,20 +7,20 @@
   resolved "https://npm.pkg.github.com/download/@umany-global/base-exceptions-js/1.3.3/de507c2fd6e89060f604219a9ba76f8f2643c038#de507c2fd6e89060f604219a9ba76f8f2643c038"
   integrity sha512-8kvAV3IW2QWqxU1+Myj14PDCVuuPdOGljlaNHDj9+i15JC1xnFe53xJaK4h+Cct/V4sD/0fZFB7Tc9PpS7ZUUQ==
 
-"@umany-global/http-client-axios@^1.0.2":
-  version "1.0.2"
-  resolved "https://npm.pkg.github.com/download/@umany-global/http-client-axios/1.0.2/eb5ff0d8d06a2a6167b25d86efe61cde19f9bef8#eb5ff0d8d06a2a6167b25d86efe61cde19f9bef8"
-  integrity sha512-QAo9OPCqvks9P/bKRVa8vDvfELiabvCVW40tzrgLWvWEpPCDXJzOhLv/RRtqcyVyv6ug+0sWglR9kenInIcrjw==
+"@umany-global/http-client-axios@^1.0.3":
+  version "1.0.3"
+  resolved "https://npm.pkg.github.com/download/@umany-global/http-client-axios/1.0.3/8e378b7ecbbb77534ba0e321f68ddde3f455e1fa#8e378b7ecbbb77534ba0e321f68ddde3f455e1fa"
+  integrity sha512-ohTA1ksppXQDKBllSUn6nXm7u1nq1LRB3zRe58IGoEpyoLYWO58346MatMuydugsOMRXJuQbgULdm1ToJGWKaQ==
   dependencies:
     "@umany-global/base-exceptions-js" "^1.3.3"
     axios "^1.7.2"
 
-"@umany-global/rest-client-js@^1.4.0":
-  version "1.4.0"
-  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.4.0/2f0db7678ba94d2264f3ee1daf3e30cdb52911ca#2f0db7678ba94d2264f3ee1daf3e30cdb52911ca"
-  integrity sha512-Z0/QA++o8cNvRu5t/nI1Gt2ptrRPRCEYopYUe4DtqjWo51o+Ix+m5iJyE1WscckAJPzwHQxPS59vnifyi9qPsw==
+"@umany-global/rest-client-js@^1.4.1":
+  version "1.4.1"
+  resolved "https://npm.pkg.github.com/download/@umany-global/rest-client-js/1.4.1/4639a23cd69d7292352f3c8b44f52c0314b91607#4639a23cd69d7292352f3c8b44f52c0314b91607"
+  integrity sha512-xo1gZ2BE9XBGE1Itv9iZpMxfKxhUeRChFsFfU8gBmIpIpevqLihSt82ZesdvmfSlUkAIF0Up351gAUp23hw3Ew==
   dependencies:
-    "@umany-global/http-client-axios" "^1.0.2"
+    "@umany-global/http-client-axios" "^1.0.3"
 
 asynckit@^0.4.0:
   version "0.4.0"

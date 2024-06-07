@@ -7,6 +7,6 @@
   "author": "dan",
   "license": "MIT",
   "dependencies": {
-    "@umany-global/rest-client-js": "^1.4.0"
+    "@umany-global/rest-client-js": "^1.4.1"
   }
 }
