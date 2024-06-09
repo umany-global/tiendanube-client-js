@@ -1,4 +1,5 @@
-import RESTClient from '@umany-global/rest-client-js';
+import RESTClient 				from '@umany-global/rest-client-js';
+import UnauthorizedException 	from '@umany-global/http-exceptions-js';
 
 export default class TiendanubeClient {
 
@@ -280,32 +281,40 @@ export default class TiendanubeClient {
 
 		return new Promise ( ( resolve, reject ) => {
 
-			// verify if authorization code is present before calling the API
-			if ( params.code ) {
+			try {
 
-				this.#authClient.post({
-					path: '/apps/authorize/token',
-					data: {
-						client_id: params.clientId ?? this.#clientId,
-						client_secret: params.clientSecret ?? this.#clientSecret,
-						grant_type: 'authorization_code',
-						code: params.code,
-					},
-					timeout: params.timeout ?? 60000,
-				}).then( response => {
+				// verify if authorization code is present before calling the API
+				if ( params.code ) {
 
-					resolve( response.data );
+					this.#authClient.post({
+						path: '/apps/authorize/token',
+						data: {
+							client_id: params.clientId ?? this.#clientId,
+							client_secret: params.clientSecret ?? this.#clientSecret,
+							grant_type: 'authorization_code',
+							code: params.code,
+						},
+						timeout: params.timeout ?? 60000,
+					}).then( response => {
 
-				}).catch( err => {
+						resolve( response.data );
 
-					reject( err );
-				});
+					}).catch( err => {
 
+						reject( err );
+					});
+
+				}
+				else {
+
+					reject( new UnauthorizedException );
+				}
 			}
-			else {
+			catch ( err ) {
 
-				reject( new Error('Param required: code') );
+				reject( err );
 			}
+
 		});
 
 	}

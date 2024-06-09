@@ -1,12 +1,13 @@
 {
   "name": "@umany-global/tiendanube-client-js",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "type": "module",
   "main": "./src/main.js",
   "repository": "https://github.com/umany-global/tiendanube-client-js.git",
   "author": "dan",
   "license": "MIT",
   "dependencies": {
+    "@umany-global/http-exceptions-js": "^1.4.5",
     "@umany-global/rest-client-js": "^1.4.1"
   }
 }
