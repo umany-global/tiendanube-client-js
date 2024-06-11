@@ -1,5 +1,5 @@
-import RESTClient 				from '@umany-global/rest-client-js';
-import UnauthorizedException 	from '@umany-global/http-exceptions-js';
+import RESTClient 					from '@umany-global/rest-client-js';
+import { UnauthorizedException }	from '@umany-global/http-exceptions-js';
 
 export default class TiendanubeClient {
 
