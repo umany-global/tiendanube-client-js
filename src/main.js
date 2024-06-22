@@ -232,7 +232,7 @@ export default class TiendanubeClient {
 
 		return this.#avoidRateLimit().then( () => {
 
-			return this.#client.get({
+			return this.#client.put({
 				path: '/'+params.store_id+'/scripts/'+params.id,
 				data: {
 					src: attributes.src,
