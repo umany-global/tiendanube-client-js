@@ -228,16 +228,16 @@ export default class TiendanubeClient {
 	// id - script id
 	// store_id - shop identifier
 	// options.auth - access token
-	updateScript ( params, attributes, options = {} ) {
+	updateScript ( params, options = {} ) {
 
 		return this.#avoidRateLimit().then( () => {
 
 			return this.#client.put({
 				path: '/'+params.store_id+'/scripts/'+params.id,
 				data: {
-					src: attributes.src,
-					event: attributes.event,
-					where: attributes.where,
+					src: params.src,
+					event: params.event,
+					where: params.where,
 				},
 				headers: {
 					'Authentication': 'bearer ' + options.auth,
